@@ -34,6 +34,14 @@ $(function() {
 			return;
 
 		if ($next.hasClass('start-music')) {
+			if (typeof $music.loop == 'boolean') {
+				$music.loop = true;
+			} else {
+				$music.addEventListener('ended', function() {
+					this.currentTime = 0;
+					this.play();
+				}, false);
+			}
 			$music.play();
 			$($music).animate({volume: 1}, 2000);
 		}
