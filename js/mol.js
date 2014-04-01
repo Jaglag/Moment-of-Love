@@ -2,25 +2,25 @@ $(function() {
   var $window = $(window),
       $doc = $(document),
       $html = $('html'),
-      $body = $('body'),	
+      $body = $('body'),    
       $container = $('#container'),
       $music = new Audio();
 
-	if ($music.canPlayType('audio/mpeg;')) {
-		$music.type= 'audio/mpeg';
-		$music.src= '/music.mp3';
-	} else {
-		$music.type= 'audio/ogg';
-		$music.src= '/music.ogg';
-	}
-	$music.volume = 0;
+    if ($music.canPlayType('audio/mpeg;')) {
+        $music.type= 'audio/mpeg';
+        $music.src= '/music.mp3';
+    } else {
+        $music.type= 'audio/ogg';
+        $music.src= '/music.ogg';
+    }
+    $music.volume = 0;
 
-	$doc.on('keydown', function(event) {
+    $doc.on('keydown', function(event) {
       if (event.which == 32) {
           $window.trigger('advance');
       };
-	});
-	
+    });
+    
     $doc.on('touchstart', function(event) {
         $window.trigger('advance');
     });
@@ -29,12 +29,12 @@ $(function() {
         var $frame = $container.find('.frame'),
             $current = $container.find('.current'),
             $next = $frame.eq($current.index() + 1);
-			
+            
         if ($current.hasClass('final'))
             return;
 
         if ($next.hasClass('start-music')) {
-			$music.loop = true;
+            $music.loop = true;
             $music.play();
             $($music).animate({volume: 1}, 2000);
         }
